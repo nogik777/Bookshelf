@@ -43,7 +43,8 @@ fun BookshelfApp(
             HomeScreen(
                 bookshelfUiState = bookshelfViewModel.bookshelfUiState,
                 modifier = modifier,
-                onBookClicked,
+                retryAction = bookshelfViewModel::getData,
+                onBookClicked = onBookClicked,
             )
         }
     }

@@ -63,7 +63,7 @@ fun ClosedAppBar(onSearchClicked: () -> Unit) {
                 Icon(
                     imageVector = Icons.Filled.Search,
                     contentDescription = "SearchIcon",
-                    tint = Color.White
+                    tint = Color.Gray
                 )
             }
         }
@@ -89,7 +89,7 @@ fun OpenedAppBar(
             placeholder = {
                           Text(
                               text = "Search here...",
-                              color = Color.White,
+                              color = Color.Gray,
                               modifier = Modifier.alpha(DefaultAlpha))
             },
             singleLine = true,
@@ -101,7 +101,7 @@ fun OpenedAppBar(
                               Icon(
                                   imageVector = Icons.Default.Search,
                                   contentDescription = "Search icon",
-                                  tint = Color.White
+                                  tint = Color.Gray
                               )
                           }
             },
@@ -118,7 +118,7 @@ fun OpenedAppBar(
                                Icon(
                                    imageVector = Icons.Default.Close,
                                    contentDescription = "Close Icon",
-                                   tint = Color.White
+                                   tint = Color.Gray
                                )
                            }
             },

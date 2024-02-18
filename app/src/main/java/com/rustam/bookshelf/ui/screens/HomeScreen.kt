@@ -1,8 +1,8 @@
 package com.rustam.bookshelf.ui.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -35,13 +35,14 @@ import com.rustam.bookshelf.ui.BookshelfUiState
 fun HomeScreen(
     bookshelfUiState: BookshelfUiState,
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(0.dp),
+    onBookClicked: (Book) -> Unit
 ) {
     when (bookshelfUiState) {
         is BookshelfUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
         is BookshelfUiState.Success -> BooksGridScreen(
             books = bookshelfUiState.data,
-            modifier = modifier
+            modifier = modifier,
+            onBookClicked
         )
         is BookshelfUiState.Error -> ErrorScreen( modifier = modifier.fillMaxSize())
     }
@@ -76,13 +77,15 @@ fun ErrorScreen(modifier: Modifier = Modifier) {
 @Composable
 fun BooksCard(
     book: Book,
-    modifier: Modifier
+    modifier: Modifier,
+    onBookClicked: (Book) -> Unit
 ) {
     Card(
         modifier = modifier
             .padding(4.dp)
             .fillMaxWidth()
-            .requiredHeight(296.dp),
+            .requiredHeight(296.dp)
+            .clickable { onBookClicked(book) },
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
 
     ) {
@@ -112,14 +115,15 @@ fun BooksCard(
 @Composable
 fun BooksGridScreen(
     books: List<Book>,
-    modifier: Modifier
+    modifier: Modifier,
+    onBookClicked: (Book) -> Unit
 ) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(150.dp),
         contentPadding = PaddingValues(4.dp)
     ) {
         itemsIndexed(books) { _, book ->
-            BooksCard(book = book, modifier)
+            BooksCard(book = book, modifier, onBookClicked)
         }
     }
 }
